@@ -1,0 +1,2 @@
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/Src/motorcontrol.c:52:13:MX_MotorControl_Init	16	static
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/Src/motorcontrol.c:62:6:vPortSetupTimerInterrupt	8	static

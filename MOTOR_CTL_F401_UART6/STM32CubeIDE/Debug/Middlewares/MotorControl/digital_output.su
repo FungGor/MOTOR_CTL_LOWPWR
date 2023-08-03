@@ -1,0 +1,2 @@
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/MCSDK_v5.4.8-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c:44:13:DOUT_SetOutputState	0	static
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/MCSDK_v5.4.8-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c:74:23:DOUT_GetOutputState	0	static

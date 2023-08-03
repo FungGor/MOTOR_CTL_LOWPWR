@@ -1,0 +1,2 @@
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/MCSDK_v5.4.8-Full/MotorControl/MCSDK/MCLib/Any/Src/pwm_common.c:76:13:startTimers	8	static
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/MCSDK_v5.4.8-Full/MotorControl/MCSDK/MCLib/Any/Src/pwm_common.c:108:13:waitForPolarizationEnd	16	static

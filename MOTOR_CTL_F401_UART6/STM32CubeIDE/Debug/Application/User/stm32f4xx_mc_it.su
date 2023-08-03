@@ -1,0 +1,7 @@
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/Src/stm32f4xx_mc_it.c:75:6:ADC_IRQHandler	0	static
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/Src/stm32f4xx_mc_it.c:106:6:TIM1_UP_TIM10_IRQHandler	0	static
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/Src/stm32f4xx_mc_it.c:124:6:TIM1_BRK_TIM9_IRQHandler	8	static
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/Src/stm32f4xx_mc_it.c:147:6:TIM2_IRQHandler	8	static
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/Src/stm32f4xx_mc_it.c:190:6:USART6_IRQHandler	16	static
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/Src/stm32f4xx_mc_it.c:240:6:HardFault_Handler	16	static
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/Src/stm32f4xx_mc_it.c:293:6:EXTI15_10_IRQHandler	8	static

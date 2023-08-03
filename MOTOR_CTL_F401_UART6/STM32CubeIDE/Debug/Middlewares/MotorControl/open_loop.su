@@ -1,0 +1,5 @@
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/MCSDK_v5.4.8-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c:47:13:OL_Init	0	static
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/MCSDK_v5.4.8-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c:58:13:OL_VqdConditioning	8	static
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/MCSDK_v5.4.8-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c:74:13:OL_UpdateVoltage	0	static
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/MCSDK_v5.4.8-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c:84:13:OL_Calc	0	static
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/MCSDK_v5.4.8-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c:106:13:OL_VF	0	static
