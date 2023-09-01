@@ -42,12 +42,13 @@ void Speed_Cruise_Control()
 
 }
 
+int16_t throttle_Current = 0;
 void ESCOOTER_Driving_Start()
 {
 	//retransmissionTimerStart();
-	MC_ProgramTorqueRampMotor1(modeControl.TARGET_IQ,modeControl.RAMP_DURATION);
-	MC_StartMotor1();
-
+	//MC_ProgramTorqueRampMotor1(modeControl.TARGET_IQ,modeControl.RAMP_DURATION);
+	//MC_StartMotor1();
+    throttle_Current = modeControl.TARGET_IQ;
 }
 
 uint8_t stop = 0;
@@ -55,7 +56,7 @@ void ESCOOTER_Driving_Stop()
 {
 	//HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5,GPIO_PIN_RESET);
 	/*Stop Motor!*/
-	MC_StopMotor1();
+	//MC_StopMotor1();
 }
 
 /*This thread might be useful (?) This thread will be deleted (?)*/

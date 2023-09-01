@@ -70,6 +70,9 @@ void ESCOOTER_InputThrottleSignal(int16_t targetCurrent)
 	/*to give the message if the throttle is pressed or not ! */
 	tempHandle.THROTTLE_Pressed = ESCOOTER_ThrottleSignalTrigger(&inputHandle);
 
+	/*Send the Iq signal to the ESCOOTER_DRIVING (?)*/
+	ESCOOTER_Set_Limit(&inputHandle);
+
 }
 
 /**To be called by motor control protocol**/
