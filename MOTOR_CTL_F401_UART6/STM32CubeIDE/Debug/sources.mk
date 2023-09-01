@@ -26,6 +26,7 @@ Application/Startup \
 Application/User \
 Drivers/CMSIS \
 Drivers/STM32F4xx_HAL_Driver \
+ESCOOTER \
 Middlewares/FreeRTOS \
 Middlewares/MotorControl \
 POWER_CONTROL \

@@ -112,6 +112,7 @@ Application/User/main.o: \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
  ../../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
+ C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/STM32CubeIDE/ESCOOTER/escooter_control.h \
  C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/STM32CubeIDE/POWER_CONTROL/POWER_CONTROL_LL.h \
  C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/STM32CubeIDE/POWER_CONTROL/POWER_CONTROL.h
 ../../Inc/main.h:
@@ -232,5 +233,6 @@ Application/User/main.o: \
 ../../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
 ../../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h:
 ../../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
+C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/STM32CubeIDE/ESCOOTER/escooter_control.h:
 C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/STM32CubeIDE/POWER_CONTROL/POWER_CONTROL_LL.h:
 C:/Users/TerenceLeung/Documents/STM32_Prototyping/MOTOR_UART_6/MOTOR_CTL_F401_UART6/STM32CubeIDE/POWER_CONTROL/POWER_CONTROL.h:

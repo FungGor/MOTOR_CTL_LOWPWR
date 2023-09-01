@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "escooter_control.h"
 #include "POWER_CONTROL_LL.h"
 #include "POWER_CONTROL.h"
 
@@ -44,7 +45,42 @@ static void MX_GPIO_Init(void);
 static void MX_NVIC_Init(void);
 static void GPIO_WAKEPIN_Init(void);
 
-uint8_t toggle = 0;
+static void SYS_GET_RESET_SOURCE(void);
+static void SYS_POWER_TRANSITION(void);
+
+uint8_t source = 0xFF;
+static void SYS_GET_RESET_SOURCE()
+{
+     if(__HAL_RCC_GET_FLAG(RCC_FLAG_LPWRRST))
+     {
+           source = 0x01;
+     }
+     else if(__HAL_RCC_GET_FLAG(RCC_FLAG_SFTRST))
+     {
+    	 source = 0x02;
+     }
+     else if(__HAL_RCC_GET_FLAG(RCC_FLAG_PINRST))
+     {
+    	 source = 0x03;
+     }
+     else if(__HAL_RCC_GET_FLAG(RCC_FLAG_PORRST))
+     {
+    	 source = 0x04;
+     }
+     else if(__HAL_RCC_GET_FLAG(RCC_FLAG_BORRST))
+     {
+    	 source = 0x05;
+     }
+     else if (__HAL_RCC_GET_FLAG(RCC_FLAG_WWDGRST))
+     {
+    	 source = 0x06;
+     }
+     else if(__HAL_RCC_GET_FLAG(RCC_FLAG_IWDGRST))
+     {
+    	 source = 0x07;
+     }
+}
+
 int main(void)
 {
   HAL_Init();
@@ -54,11 +90,13 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM2_Init();
   MX_USART6_UART_Init();
+  ESCOOTER_init();
   MX_MotorControl_Init();
   MX_NVIC_Init();
   //Peripheral_DeInit();
   POWER_CONTROL_Init();
   POWER_CONTROL_START_MONITORING();
+  retransmissionTimerStart();
 
   osThreadDef(mediumFrequency, startMediumFrequencyTask, osPriorityNormal, 0, 128);
   mediumFrequencyHandle = osThreadCreate(osThread(mediumFrequency), NULL);
@@ -66,6 +104,9 @@ int main(void)
   /* definition and creation of safety */
   osThreadDef(safety, StartSafetyTask, osPriorityAboveNormal, 0, 128);
   safetyHandle = osThreadCreate(osThread(safety), NULL);
+
+  /*Start RTOS E-Scooter Task */
+  ESCOOTER_RunCoreTask();
   osKernelStart();
   while (1)
   {
@@ -449,12 +490,12 @@ static void MX_GPIO_Init(void)
   }
   else if (uart_off == 1)
   {
-	  GPIO_InitStruct.Pin = GPIO_PIN_11;
-	  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-	  GPIO_InitStruct.Pull = GPIO_NOPULL;
+	  GPIO_InitStruct.Pin = GPIO_PIN_11; /*UART6 TX Pin*/
+	  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;/*Rising Edge*/
+	  GPIO_InitStruct.Pull = GPIO_NOPULL; /*No pull up and pull down resistor*/
 	  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-	  GPIO_InitStruct.Pin = GPIO_PIN_12;
+	  GPIO_InitStruct.Pin = GPIO_PIN_12;  /*UART6 RX Pin*/
 	  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	  GPIO_InitStruct.Pull = GPIO_NOPULL;
 	  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -538,6 +579,11 @@ void Power_CTL(uint8_t status)
     }
 }
 
+void suspend_SystemTask(void)
+{
+	vTaskSuspend(mediumFrequencyHandle);
+	vTaskSuspend(safetyHandle);
+}
 /**
   * @brief  This function is executed in case of error occurrence.
   * @retval None

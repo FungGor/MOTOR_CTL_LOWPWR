@@ -198,10 +198,10 @@ typedef enum
  */
 typedef enum
 {
-	MC_Protocol_ES_Throttle,
-	MC_Protocol_ES_Brake,
-	MC_Protocol_ES_Brake_Release,
-	MC_Protocol_ES_Mode_Config
+	MC_Protocol_ES_Throttle,     /*It's just for debug purpose, it's not used in the dash-board control*/
+	MC_Protocol_ES_Brake,        /*We will use it !*/
+	MC_Protocol_ES_Brake_Release,/*We will use it !*/
+	MC_Protocol_ES_Mode_Config   /*It's just for debug purpose, it's not used in dash-board control*/
 }MC_Protocol_ES_t;
 
 /* Exported types ------------------------------------------------------------*/

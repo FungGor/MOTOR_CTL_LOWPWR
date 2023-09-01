@@ -12,6 +12,7 @@ RM := rm -rf
 -include POWER_CONTROL/subdir.mk
 -include Middlewares/MotorControl/subdir.mk
 -include Middlewares/FreeRTOS/subdir.mk
+-include ESCOOTER/subdir.mk
 -include Drivers/STM32F4xx_HAL_Driver/subdir.mk
 -include Drivers/CMSIS/subdir.mk
 -include Application/User/subdir.mk

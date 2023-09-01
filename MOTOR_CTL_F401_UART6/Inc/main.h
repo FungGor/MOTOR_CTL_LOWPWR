@@ -60,6 +60,8 @@ void System_State(uint8_t state);
 void Peripheral_DeInit(void);
 
 void Power_CTL(uint8_t status);
+
+void suspend_SystemTask(void);
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */

@@ -300,7 +300,6 @@ void EXTI15_10_IRQHandler (void)
     dllm++;
     if(dllm == 2)
     {
-    	//Power_CTL(0);
     	POWER_CHANGE_STATE(POWER_OFF);
     }
     else if (dllm > 6)

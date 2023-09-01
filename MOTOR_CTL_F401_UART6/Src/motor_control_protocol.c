@@ -23,6 +23,8 @@
 #include "user_interface.h"
 #include "motor_control_protocol.h"
 #include "main.h"
+#include "ESCOOTER_ACK_MSG.h"
+#include "ESCOOTER_MainTask.h"
 #include "POWER_CONTROL_LL.h"
 #include "POWER_CONTROL.h"
 /**
@@ -612,9 +614,15 @@ __weak void MCP_ReceivedFrame(MCP_Handle_t *pHandle, uint8_t Code, uint8_t *buff
 
     	    case MC_PROTOCOL_SYS_HEARTBEAT:
     	    {
+    	    	//$2E$01$02$31
                 RequireAck = false;
                 bNoError = true;
+                POWER_PACKET_ACK();
+                Stop_RetransmissionTimer();
                 /*Send Heart-Beat ACK Signal to the dash-board*/
+                uint8_t heartbeat = 0x20;
+                pHandle -> fFcpSend(pHandle->pFCP, ACK_NOERROR,&heartbeat,1);
+                retransmissionTimerStart();
     	    }
     	    break;
 
@@ -651,6 +659,103 @@ __weak void MCP_ReceivedFrame(MCP_Handle_t *pHandle, uint8_t Code, uint8_t *buff
     	}
     }
     break;
+
+    /*To test for throttle and brake's functionalities, for debug purpose, users are suggested to use MC_PROTOCOL_CODE_ES_CONTROL commands */
+    case MC_PROTOCOL_CODE_ES_CONTROL:
+    {
+    	MC_Protocol_ES_t bSysID = (MC_Protocol_ES_t)buffer[0];
+    	switch(bSysID)
+    	{
+    	   case MC_Protocol_ES_Throttle: /*It's just for debug purpose, it's not used in the dash-board control*/
+    	   {
+               bNoError = true;
+               RequireAck = false;
+               pHandle -> fFcpSend(pHandle->pFCP, ACK_NOERROR,&THROTTLE_SIGNAL_RECEIVED,1);
+               /*You could freely send some dummy data to ensure that they are well received and saved in API*/
+               /*Do anythings you want ! ! !*/
+               ESCOOTER_InputThrottleSignal(7600);
+    	   }
+    	   break;
+
+    	   case MC_Protocol_ES_Brake:
+    	   {
+              bNoError = true;
+              RequireAck = false;
+              pHandle -> fFcpSend(pHandle->pFCP, ACK_NOERROR,&BRAKE_SIGNAL_RECEIVED,1);
+              /*Trigger Brake Signal  -> Just For the Debug Purpose */
+              ESCOOTER_InputBrakeSignal();
+    	   }
+    	   break;
+
+    	   case MC_Protocol_ES_Brake_Release:
+    	   {
+    		   bNoError = true;
+    		   RequireAck = false;
+    		   pHandle -> fFcpSend(pHandle->pFCP, ACK_NOERROR,&release_Brake,1);
+    		   /*User Tries to Release the Brake -> Just For the Debug Purpose*/
+    		   ESCOOTER_DEBUG_CancelBrakeSignal();
+    	   }
+    	   break;
+
+    	   case MC_Protocol_ES_Mode_Config: /*It's just for debug purpose, it's not used in the dash-board control*/
+    	   {
+               bNoError = true;
+               RequireAck = false;
+               pHandle -> fFcpSend(pHandle->pFCP, ACK_NOERROR, &debug_torque_output,1);
+               /*You could freely send some dummy data to ensure that they are well received and saved in API*/
+               ESCOOTER_DriveModeConfig(11450,480,3000);
+    	   }
+    	   break;
+
+    	   default:
+    	   {
+
+    	   }
+    	   break;
+    	}
+    }
+    break;
+
+    case MC_PROTOCOL_TORQUE_RAMP_CONFIG: /*CC2640 Sets Driving Mode Configuration*/
+      {
+          /*Decode the input dummy data, pass them to the API or UART2 fcpSend*/
+      	/*Example :
+      	 * CMD LIST --> Configure different driving modes! !:
+      	 * Sports  : $33$0A$86$3D$00$00$97$02$00$00$D0$07$72
+      	 * Leisure : $33$0A$BA$2C$00$00$E0$01$00$00$B8$0B$C9
+      	 * Amble   : $33$0A$64$19$00$00$0E$01$00$00$A0$0F$79
+      	 * CMD is sent by the Dash-board
+      	 * Those commands are defined and encoded through STM32MCP the protocol in CC2640 / Master Devices
+      	 * */
+      	bNoError = true;
+      	RequireAck = false;
+      	int16_t  max_IQ    = buffer[0] + (buffer[1] << 8) + (buffer[2] << 16) + (buffer[3] << 24);
+      	int16_t  max_Speed = buffer[4] + (buffer[5] << 8) + (buffer[6] << 16) + (buffer[7] << 24);
+      	uint16_t time_Ramp = buffer[8] + (buffer[9] << 8);
+      	ESCOOTER_DriveModeConfig(max_IQ,max_Speed,time_Ramp);
+      	pHandle -> fFcpSend(pHandle->pFCP, ACK_NOERROR, &DRIVE_MODE_CONFIG_SUCCESS,1);
+      	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+      }
+      break;
+
+    case MC_PROTOCOL_TORQUE_DYNAMIC_CONFIG: /*Press the throttle, gives Iq to the motor*/
+      {
+      	/*Decode the input dummy data, pass them to the api or UART2 fcpSend*/
+      	/*The Throttle keeps sending commands with IQ value / Current in s16A
+      	 *CMD is sent by the Dash-board
+      	 *Those commands are defined and encoded through STM32MCP the protocol in CC2640 / Master Devices
+      	 *For Example, if we wanna send the command with Dynamic IQ = 7800, Allowable Speed = 600:
+      	 *$34$08$58$02$00$00$78$1E$00$00$2D
+      	 * */
+      	bNoError = true;
+      	RequireAck = false;
+      	int16_t speed_limit = buffer[0] + (buffer[1] << 8) + (buffer[2] << 16) + (buffer[3] << 24);
+      	int16_t throttle_IQ = buffer[4] + (buffer[5] << 8) + (buffer[6] << 16) + (buffer[7] << 24);
+      	ESCOOTER_InputThrottleSignal(throttle_IQ);
+      	pHandle -> fFcpSend(pHandle->pFCP,ACK_NOERROR, &THROTTLE_SIGNAL_RECEIVED,1);
+      }
+      break;
+
   case MC_PROTOCOL_CODE_NONE:
     {
     }
