@@ -8,7 +8,7 @@
 #include "mc_api.h"
 #include "main.h"
 
-void ESCOOTER_PhysicalParameterInit(ESCOOTER_Physical_State *stateHandle)
+void ESCOOTER_PhysicalParameterInit(ESCOOTER_Physical_State_t *stateHandle)
 {
 	stateHandle->current_speed = 0;
 	stateHandle->phase_current = 0;
@@ -16,7 +16,7 @@ void ESCOOTER_PhysicalParameterInit(ESCOOTER_Physical_State *stateHandle)
 	stateHandle->motor_status  = 0;
 }
 
-ESCOOTER_Physical_State ESCOOTER_PhysicalParameterMonitoring(ESCOOTER_Physical_State *stateHandle)
+ESCOOTER_Physical_State_t ESCOOTER_PhysicalParameterMonitoring(ESCOOTER_Physical_State_t *stateHandle)
 {
 	/*You could test it by inputing dummy data */
     stateHandle->current_speed = MC_GetMecSpeedAverageMotor1();

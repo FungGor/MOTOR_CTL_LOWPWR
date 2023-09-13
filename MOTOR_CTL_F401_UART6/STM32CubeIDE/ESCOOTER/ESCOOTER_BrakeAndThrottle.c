@@ -10,7 +10,7 @@
 /**To be called by motor control protocol**/
 /**Before running the Main Task, please verify this function carefully**/
 /*Input some dummy commands -> check it*/
-bool ESCOOTER_ThrottleSignalTrigger(ESCOOTER_BrakeANDThrottleInput *inputHandle)
+bool ESCOOTER_ThrottleSignalTrigger(ESCOOTER_BrakeANDThrottleInput_t *inputHandle)
 {
 	if(inputHandle->TARGET_IQ != 0)
 	{
@@ -23,7 +23,7 @@ bool ESCOOTER_ThrottleSignalTrigger(ESCOOTER_BrakeANDThrottleInput *inputHandle)
 /**Before running the Main Task, please verify this function carefully**/
 /*Input some dummy commands -> check it*/
 /*This function must be triggered by UART Commands!!*/
-bool ESCOOTER_BrakeSignalTrigger(ESCOOTER_Operation *opHandle,ESCOOTER_BrakeANDThrottleInput *inputHandle)
+bool ESCOOTER_BrakeSignalTrigger(ESCOOTER_Operation_t *opHandle,ESCOOTER_BrakeANDThrottleInput_t *inputHandle)
 {
 	if(inputHandle->brake == false)
 	{
@@ -44,7 +44,7 @@ bool ESCOOTER_BrakeSignalTrigger(ESCOOTER_Operation *opHandle,ESCOOTER_BrakeANDT
 /*Input some dummy commands -> check it*/
 /*This function must be triggered by UART Commands!!*/
 /*Change it to boolean*/
-void ESCOOTER_DEBUG_ReleaseBrakeSignal(ESCOOTER_Operation *opHandle, ESCOOTER_BrakeANDThrottleInput *inputHandle)
+void ESCOOTER_DEBUG_ReleaseBrakeSignal(ESCOOTER_Operation_t *opHandle, ESCOOTER_BrakeANDThrottleInput_t *inputHandle)
 {
 	if(inputHandle->brake == true)
 	{

@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00020608  2**0
                   CONTENTS, READONLY
- 12 .debug_line   0004445d  00000000  00000000  00020638  2**0
+ 12 .debug_line   0004445f  00000000  00000000  00020638  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_info   0004ca4e  00000000  00000000  00064a95  2**0
+ 13 .debug_info   0004ca6e  00000000  00000000  00064a97  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00009111  00000000  00000000  000b14e3  2**0
+ 14 .debug_abbrev 00009120  00000000  00000000  000b1505  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00001e00  00000000  00000000  000ba5f8  2**3
+ 15 .debug_aranges 00001e00  00000000  00000000  000ba628  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_str    000b48ec  00000000  00000000  000bc3f8  2**0
+ 16 .debug_str    000b496b  00000000  00000000  000bc428  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_ranges 000043c0  00000000  00000000  00170ce8  2**3
+ 17 .debug_ranges 000043c0  00000000  00000000  00170d98  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_macro  00024412  00000000  00000000  001750a8  2**0
+ 18 .debug_macro  00024412  00000000  00000000  00175158  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  001994ba  2**0
+ 19 .comment      00000050  00000000  00000000  0019956a  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00005804  00000000  00000000  0019950c  2**2
+ 20 .debug_frame  00005844  00000000  00000000  001995bc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_loc    0002207d  00000000  00000000  0019ed10  2**0
+ 21 .debug_loc    0002207d  00000000  00000000  0019ee00  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -12147,7 +12147,7 @@ HAL_StatusTypeDef HAL_UART_Init(UART_HandleTypeDef *huart)
 /**To be called by motor control protocol**/
 /**Before running the Main Task, please verify this function carefully**/
 /*Input some dummy commands -> check it*/
-bool ESCOOTER_ThrottleSignalTrigger(ESCOOTER_BrakeANDThrottleInput *inputHandle)
+bool ESCOOTER_ThrottleSignalTrigger(ESCOOTER_BrakeANDThrottleInput_t *inputHandle)
 {
 	if(inputHandle->TARGET_IQ != 0)
  8004bf0:	f9b0 0000 	ldrsh.w	r0, [r0]
@@ -12165,7 +12165,7 @@ bool ESCOOTER_ThrottleSignalTrigger(ESCOOTER_BrakeANDThrottleInput *inputHandle)
 /**Before running the Main Task, please verify this function carefully**/
 /*Input some dummy commands -> check it*/
 /*This function must be triggered by UART Commands!!*/
-bool ESCOOTER_BrakeSignalTrigger(ESCOOTER_Operation *opHandle,ESCOOTER_BrakeANDThrottleInput *inputHandle)
+bool ESCOOTER_BrakeSignalTrigger(ESCOOTER_Operation_t *opHandle,ESCOOTER_BrakeANDThrottleInput_t *inputHandle)
 {
 	if(inputHandle->brake == false)
  8004bfc:	7a0b      	ldrb	r3, [r1, #8]
@@ -12189,7 +12189,7 @@ bool ESCOOTER_BrakeSignalTrigger(ESCOOTER_Operation *opHandle,ESCOOTER_BrakeANDT
 /*Input some dummy commands -> check it*/
 /*This function must be triggered by UART Commands!!*/
 /*Change it to boolean*/
-void ESCOOTER_DEBUG_ReleaseBrakeSignal(ESCOOTER_Operation *opHandle, ESCOOTER_BrakeANDThrottleInput *inputHandle)
+void ESCOOTER_DEBUG_ReleaseBrakeSignal(ESCOOTER_Operation_t *opHandle, ESCOOTER_BrakeANDThrottleInput_t *inputHandle)
 {
 	if(inputHandle->brake == true)
  8004c08:	7a0b      	ldrb	r3, [r1, #8]
@@ -12210,8 +12210,8 @@ void ESCOOTER_DEBUG_ReleaseBrakeSignal(ESCOOTER_Operation *opHandle, ESCOOTER_Br
  8004c12:	bf00      	nop
 
 08004c14 <ESCOOTER_saveStatus>:
-ESCOOTER_BrakeANDThrottleInput modeControl; /*Motor Physical Limitations*/
-ESCOOTER_Physical_State motorStatus; /*Current Motor Physical Status*/
+ESCOOTER_BrakeANDThrottleInput_t modeControl; /*Motor Physical Limitations*/
+ESCOOTER_Physical_State_t motorStatus; /*Current Motor Physical Status*/
 
 void ESCOOTER_saveStatus (uint8_t state)
 {
@@ -12225,7 +12225,7 @@ void ESCOOTER_saveStatus (uint8_t state)
 
 08004c20 <ESCOOTER_getStatus>:
 
-ESCOOTER_Driving_State ESCOOTER_getStatus()
+ESCOOTER_Driving_State_t ESCOOTER_getStatus()
 {
 	return Driving_State;
  8004c20:	4b01      	ldr	r3, [pc, #4]	; (8004c28 <ESCOOTER_getStatus+0x8>)
@@ -12237,7 +12237,7 @@ ESCOOTER_Driving_State ESCOOTER_getStatus()
 
 08004c2c <ESCOOTER_Set_Limit>:
 
-void ESCOOTER_Set_Limit(ESCOOTER_BrakeANDThrottleInput *limitHandle)
+void ESCOOTER_Set_Limit(ESCOOTER_BrakeANDThrottleInput_t *limitHandle)
 {
  8004c2c:	4602      	mov	r2, r0
      modeControl = *limitHandle;
@@ -12253,7 +12253,7 @@ void ESCOOTER_Set_Limit(ESCOOTER_BrakeANDThrottleInput *limitHandle)
 
 08004c40 <ESCOOTER_Set_PhysicalParam>:
 
-void ESCOOTER_Set_PhysicalParam(ESCOOTER_Physical_State *motorParam)
+void ESCOOTER_Set_PhysicalParam(ESCOOTER_Physical_State_t *motorParam)
 {
 	 motorStatus = *motorParam;
  8004c40:	c807      	ldmia	r0, {r0, r1, r2}
@@ -12286,8 +12286,8 @@ void ESCOOTER_Driving_Start()
  8004c66:	bf00      	nop
 
 08004c68 <ESboot>:
-ESCOOTER_Physical_State pstateHandle; //Monitor the Escooter's Electrical & Mechanical Parameters
-ESCOOTER_BrakeANDThrottleInput inputHandle;
+ESCOOTER_Physical_State_t pstateHandle; //Monitor the Escooter's Electrical & Mechanical Parameters
+ESCOOTER_BrakeANDThrottleInput_t inputHandle;
 
 /*ESboot() must be called when the E-Scooter is turned-on！*/
 void ESboot()
@@ -12677,7 +12677,7 @@ void ESCOOTER_Stop_Driving_Task()
 #include "mc_api.h"
 #include "main.h"
 
-void ESCOOTER_PhysicalParameterInit(ESCOOTER_Physical_State *stateHandle)
+void ESCOOTER_PhysicalParameterInit(ESCOOTER_Physical_State_t *stateHandle)
 {
 	stateHandle->current_speed = 0;
  8004e64:	2300      	movs	r3, #0
@@ -12693,7 +12693,7 @@ void ESCOOTER_PhysicalParameterInit(ESCOOTER_Physical_State *stateHandle)
 
 08004e70 <ESCOOTER_PhysicalParameterMonitoring>:
 
-ESCOOTER_Physical_State ESCOOTER_PhysicalParameterMonitoring(ESCOOTER_Physical_State *stateHandle)
+ESCOOTER_Physical_State_t ESCOOTER_PhysicalParameterMonitoring(ESCOOTER_Physical_State_t *stateHandle)
 {
  8004e70:	b538      	push	{r3, r4, r5, lr}
  8004e72:	460c      	mov	r4, r1
@@ -12721,10 +12721,10 @@ ESCOOTER_Physical_State ESCOOTER_PhysicalParameterMonitoring(ESCOOTER_Physical_S
 
 08004e9c <ESCOOTER_DrivingModeSetDefault>:
 
-EScooter_Driving_Mode driving_mode;
+EScooter_Driving_Mode_t driving_mode;
 
 /*Static + Default*/
-void ESCOOTER_DrivingModeSetDefault(ESCOOTER_BrakeANDThrottleInput *limit)
+void ESCOOTER_DrivingModeSetDefault(ESCOOTER_BrakeANDThrottleInput_t *limit)
 {
  8004e9c:	b410      	push	{r4}
    limit->TARGET_IQ = 0;
@@ -12751,7 +12751,7 @@ void ESCOOTER_DrivingModeSetDefault(ESCOOTER_BrakeANDThrottleInput *limit)
 08004ebc <ESCOOTER_ConfigDrivingMode>:
 
 /*Dynamic*/
-void ESCOOTER_ConfigDrivingMode(ESCOOTER_BrakeANDThrottleInput *limit,int16_t max_IQ, int16_t allowable_rpm, uint16_t acceleration_ramp)
+void ESCOOTER_ConfigDrivingMode(ESCOOTER_BrakeANDThrottleInput_t *limit,int16_t max_IQ, int16_t allowable_rpm, uint16_t acceleration_ramp)
 {
  8004ebc:	b500      	push	{lr}
 {
@@ -21511,9 +21511,9 @@ __weak void UFCP_AbortReceive( FCP_Handle_t * pHandle )
 
 0800804c <POWER_CONTROL_CONFG>:
 POWER_State_t state_Handler;
-Power_Control_Heartbeat protocolHandler;
+Power_Control_Heartbeat_t protocolHandler;
 
-void POWER_CONTROL_CONFG(POWER_Control *cmd)
+void POWER_CONTROL_CONFG(POWER_Control_t *cmd)
 {
 	pwrControl = cmd;
  800804c:	4b01      	ldr	r3, [pc, #4]	; (8008054 <POWER_CONTROL_CONFG+0x8>)
@@ -21525,7 +21525,7 @@ void POWER_CONTROL_CONFG(POWER_Control *cmd)
 
 08008058 <POWER_INDICATOR_CONFG>:
 
-void POWER_INDICATOR_CONFG(Power_Status_Indicator *indicator)
+void POWER_INDICATOR_CONFG(Power_Status_Indicator_t *indicator)
 {
 	tailLightControl = indicator;
  8008058:	4b01      	ldr	r3, [pc, #4]	; (8008060 <POWER_INDICATOR_CONFG+0x8>)
@@ -21537,7 +21537,7 @@ void POWER_INDICATOR_CONFG(Power_Status_Indicator *indicator)
 
 08008064 <POWER_RETRANSMIT_CTL_CONFG>:
 
-void POWER_RETRANSMIT_CTL_CONFG(Power_sysProtocol_Handler *reTransTIM)
+void POWER_RETRANSMIT_CTL_CONFG(Power_sysProtocol_Handler_t *reTransTIM)
 {
     reTransMgnt = reTransTIM;
  8008064:	4b01      	ldr	r3, [pc, #4]	; (800806c <POWER_RETRANSMIT_CTL_CONFG+0x8>)

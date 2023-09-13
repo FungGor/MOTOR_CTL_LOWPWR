@@ -27,20 +27,20 @@ static void SYSTEM_START_RETRANSMISSION_TIMER();
 static void SYSTEM_STOP_RETRANSMISSION_TIMER();
 void TIM3_IRQHandler(void);
 
-static POWER_Control power_control =
+static POWER_Control_t power_control =
 {
 		SYSTEM_POWER_OFF,
 		SYSTEM_BOOT,
 		SYSTEM_POWER_ON
 };
 
-static Power_Status_Indicator power_status_indicator =
+static Power_Status_Indicator_t power_status_indicator =
 {
 		SYSTEM_INDICATOR_ON,
 		SYSTEM_INDICATOR_OFF
 };
 
-static Power_sysProtocol_Handler protocol_control =
+static Power_sysProtocol_Handler_t protocol_control =
 {
 		SYSTEM_START_RETRANSMISSION_TIMER,
 		SYSTEM_STOP_RETRANSMISSION_TIMER

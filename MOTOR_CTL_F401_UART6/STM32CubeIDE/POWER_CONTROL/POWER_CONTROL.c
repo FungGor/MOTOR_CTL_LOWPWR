@@ -10,23 +10,23 @@
 #include "main.h"
 #include <stdint.h>
 
-static POWER_Control *pwrControl;
-static Power_Status_Indicator *tailLightControl;
-static Power_sysProtocol_Handler *reTransMgnt;
+static POWER_Control_t *pwrControl;
+static Power_Status_Indicator_t *tailLightControl;
+static Power_sysProtocol_Handler_t *reTransMgnt;
 POWER_State_t state_Handler;
-Power_Control_Heartbeat protocolHandler;
+Power_Control_Heartbeat_t protocolHandler;
 
-void POWER_CONTROL_CONFG(POWER_Control *cmd)
+void POWER_CONTROL_CONFG(POWER_Control_t *cmd)
 {
 	pwrControl = cmd;
 }
 
-void POWER_INDICATOR_CONFG(Power_Status_Indicator *indicator)
+void POWER_INDICATOR_CONFG(Power_Status_Indicator_t *indicator)
 {
 	tailLightControl = indicator;
 }
 
-void POWER_RETRANSMIT_CTL_CONFG(Power_sysProtocol_Handler *reTransTIM)
+void POWER_RETRANSMIT_CTL_CONFG(Power_sysProtocol_Handler_t *reTransTIM)
 {
     reTransMgnt = reTransTIM;
 }

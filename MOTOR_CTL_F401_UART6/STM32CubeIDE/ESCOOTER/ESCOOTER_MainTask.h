@@ -22,18 +22,18 @@ typedef enum
 	DRIVING_IDLE  = 0,  /*EScooter is in standby mode! */
 	DRIVING_START = 1,  /*EScooter is in driving mode! */
 	DRIVING_STOP  = 2   /*EScooter is in stop mode! */
-}ESCOOTER_Driving_State;
+}ESCOOTER_Driving_State_t;
 
 typedef struct
 {
-	ESCOOTER_Driving_State bDrivingState;
+	ESCOOTER_Driving_State_t bDrivingState;
 	bool BRAKE_Trigger;
     bool THROTTLE_Pressed;
     bool need_KICK_OFF;
     bool ESCOOTER_MOVE;
     bool systemError;
 	osThreadId EScooterInDriving;
-}ESCOOTER_Operation;
+}ESCOOTER_Operation_t;
 
 
 void ESboot();

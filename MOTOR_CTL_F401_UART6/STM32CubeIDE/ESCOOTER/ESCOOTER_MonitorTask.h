@@ -19,11 +19,11 @@ typedef struct
     int16_t phase_voltage;   /*Check the Phase Voltage */
     int32_t motor_status;    /*Check the motor status */
 
-}ESCOOTER_Physical_State;
+}ESCOOTER_Physical_State_t;
 
-void ESCOOTER_PhysicalParameterInit(ESCOOTER_Physical_State *stateHandle);
+void ESCOOTER_PhysicalParameterInit(ESCOOTER_Physical_State_t *stateHandle);
 
-ESCOOTER_Physical_State ESCOOTER_PhysicalParameterMonitoring(ESCOOTER_Physical_State *stateHandle);
+ESCOOTER_Physical_State_t ESCOOTER_PhysicalParameterMonitoring(ESCOOTER_Physical_State_t *stateHandle);
 
 
 #ifdef __cplusplus

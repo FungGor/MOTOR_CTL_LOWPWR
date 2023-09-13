@@ -17,11 +17,11 @@
 #include "cmsis_os.h"
 
 /*UART6 --> Tx: PA11; Rx:PA12*/
-ESCOOTER_Operation tempHandle; //Store Dynamic Variables
-ESCOOTER_Operation opInitHandle; //Store Static Variables
+ESCOOTER_Operation_t tempHandle; //Store Dynamic Variables
+ESCOOTER_Operation_t opInitHandle; //Store Static Variables
 
-ESCOOTER_Physical_State pstateHandle; //Monitor the Escooter's Electrical & Mechanical Parameters
-ESCOOTER_BrakeANDThrottleInput inputHandle;
+ESCOOTER_Physical_State_t pstateHandle; //Monitor the Escooter's Electrical & Mechanical Parameters
+ESCOOTER_BrakeANDThrottleInput_t inputHandle;
 
 /*ESboot() must be called when the E-Scooter is turned-on！*/
 void ESboot()

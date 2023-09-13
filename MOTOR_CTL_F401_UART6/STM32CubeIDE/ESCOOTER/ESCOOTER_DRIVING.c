@@ -13,28 +13,48 @@
 #include "mc_api.h"
 #include "main.h"
 
-ESCOOTER_Driving_State Driving_State;     /*Determines the current E-Scooter's operation status*/
-ESCOOTER_BrakeANDThrottleInput modeControl; /*Motor Physical Limitations*/
-ESCOOTER_Physical_State motorStatus; /*Current Motor Physical Status*/
+ESCOOTER_Driving_State_t Driving_State;     /*Determines the current E-Scooter's operation status*/
+ESCOOTER_BrakeANDThrottleInput_t modeControl; /*Motor Physical Limitations*/
+ESCOOTER_Physical_State_t motorStatus; /*Current Motor Physical Status*/
 
 void ESCOOTER_saveStatus (uint8_t state)
 {
 	  Driving_State = state;
 }
 
-ESCOOTER_Driving_State ESCOOTER_getStatus()
+ESCOOTER_Driving_State_t ESCOOTER_getStatus()
 {
 	return Driving_State;
 }
 
-void ESCOOTER_Set_Limit(ESCOOTER_BrakeANDThrottleInput *limitHandle)
+void ESCOOTER_Set_Limit(ESCOOTER_BrakeANDThrottleInput_t *limitHandle)
 {
      modeControl = *limitHandle;
 }
 
-void ESCOOTER_Set_PhysicalParam(ESCOOTER_Physical_State *motorParam)
+void ESCOOTER_Set_PhysicalParam(ESCOOTER_Physical_State_t *motorParam)
 {
 	 motorStatus = *motorParam;
+}
+
+void ESCOOTER_Get_Speed()
+{
+
+}
+
+void ESCOOTER_Get_PhaseCurrent()
+{
+
+}
+
+void ESCOOTER_Get_PhaseVoltage()
+{
+
+}
+
+void ESCOOTER_Get_MotorState()
+{
+
 }
 
 void Speed_Cruise_Control()

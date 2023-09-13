@@ -35,7 +35,7 @@ typedef struct
     system_sleep sleep;
     system_wake wake;
     system_power_on powerOn;
-}POWER_Control;
+}POWER_Control_t;
 
 typedef void (*indicator_on)(void);
 typedef void (*indicator_off)(void);
@@ -43,13 +43,13 @@ typedef struct
 {
 	indicator_on  switch_on;
 	indicator_off switch_off;
-}Power_Status_Indicator;
+}Power_Status_Indicator_t;
 
 typedef struct
 {
 	bool    protocolFailure;
 	uint8_t RxPacketLossCount;
-}Power_Control_Heartbeat;
+}Power_Control_Heartbeat_t;
 
 typedef void (*reTransmit_Start)(void);
 typedef void (*reTransmit_Stop)(void);
@@ -57,11 +57,11 @@ typedef struct
 {
     reTransmit_Start reTransmissionOn;
     reTransmit_Stop  reTransmissionOff;
-}Power_sysProtocol_Handler;
+}Power_sysProtocol_Handler_t;
 
-void POWER_CONTROL_CONFG(POWER_Control *cmd);
-void POWER_INDICATOR_CONFG(Power_Status_Indicator *indicator);
-void POWER_RETRANSMIT_CTL_CONFG(Power_sysProtocol_Handler *reTransTIM);
+void POWER_CONTROL_CONFG(POWER_Control_t *cmd);
+void POWER_INDICATOR_CONFG(Power_Status_Indicator_t *indicator);
+void POWER_RETRANSMIT_CTL_CONFG(Power_sysProtocol_Handler_t *reTransTIM);
 void POWER_SET_DEFAULT_STATE(POWER_State_t state);
 void POWER_CHANGE_STATE(POWER_State_t state);
 void Stop_RetransmissionTimer();
