@@ -683,7 +683,7 @@ __weak void MCP_ReceivedFrame(MCP_Handle_t *pHandle, uint8_t Code, uint8_t *buff
               RequireAck = false;
               pHandle -> fFcpSend(pHandle->pFCP, ACK_NOERROR,&BRAKE_SIGNAL_RECEIVED,1);
               /*Trigger Brake Signal  -> Just For the Debug Purpose */
-              ESCOOTER_InputBrakeSignal();
+              //ESCOOTER_InputBrakeSignal();
     	   }
     	   break;
 
@@ -693,7 +693,7 @@ __weak void MCP_ReceivedFrame(MCP_Handle_t *pHandle, uint8_t Code, uint8_t *buff
     		   RequireAck = false;
     		   pHandle -> fFcpSend(pHandle->pFCP, ACK_NOERROR,&release_Brake,1);
     		   /*User Tries to Release the Brake -> Just For the Debug Purpose*/
-    		   ESCOOTER_DEBUG_CancelBrakeSignal();
+    		   //ESCOOTER_DEBUG_CancelBrakeSignal();
     	   }
     	   break;
 

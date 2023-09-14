@@ -13,9 +13,9 @@ EScooter_Driving_Mode_t driving_mode;
 void ESCOOTER_DrivingModeSetDefault(ESCOOTER_BrakeANDThrottleInput_t *limit)
 {
    limit->TARGET_IQ = 0;
-   limit->IQ_LIMIT = 6500;
-   limit->SPEED_LIMIT = 270;
-   limit->RAMP_DURATION = 4000;
+   limit->IQ_LIMIT = 15750;
+   limit->SPEED_LIMIT = 663;
+   limit->RAMP_DURATION = 2000;
    ESCOOTER_Set_Limit(limit);
 }
 
@@ -36,7 +36,7 @@ void ESCOOTER_ConfigDrivingMode(ESCOOTER_BrakeANDThrottleInput_t *limit,int16_t 
 
 void ESCOOTER_DetermineDrivingMode(ESCOOTER_BrakeANDThrottleInput_t *limit)
 {
-	int16_t max_Current[3] = {6500,11450,15750};
+	int16_t max_Current[3] = {6457,11497,15750};
 	int16_t max_RPM[3]     = {270,480,663};
 	int16_t max_Ramp[3]    = {4000,3000,2000};
 
