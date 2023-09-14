@@ -60,6 +60,7 @@ void PacketLossCount()
 void POWER_PACKET_ACK()
 {
 	protocolHandler.RxPacketLossCount = 0;
+	protocolHandler.heartBeatSent++;
 }
 
 void POWER_PROTOCOL_CHECKSTATUS()

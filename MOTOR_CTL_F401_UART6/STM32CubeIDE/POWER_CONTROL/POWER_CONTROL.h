@@ -49,6 +49,7 @@ typedef struct
 {
 	bool    protocolFailure;
 	uint8_t RxPacketLossCount;
+	uint8_t heartBeatSent;
 }Power_Control_Heartbeat_t;
 
 typedef void (*reTransmit_Start)(void);
